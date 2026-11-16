@@ -413,8 +413,11 @@
   }
   .guide-group-title:first-of-type{margin-top:2px}
   .guide-list + .guide-list{margin-top:14px}
-  /* 補足文：他の補足文と同じように、カードの幅の中で自然に改行される小さめの文字にする */
-  .coaster-note{font-size:.76rem;color:var(--ink-soft)}
+  /* 補足文：本文（.guide-list p の .95rem）よりはっきり小さい .8rem にする。
+     .guide-list p より詳細度を高くしないと本文サイズに負けてしまうので、
+     セレクタは .guide-list p.coaster-note の形で指定する。
+     改行はカードの幅の中で自然に折り返す（改行禁止・画面幅連動は付けない） */
+  .guide-list p.coaster-note{font-size:.8rem;color:var(--ink-soft)}
   .guide-list .target-list{margin:4px 0 6px;padding-left:1.4em;font-size:.95rem}
   .guide-list .target-list li{margin-bottom:2px}
   .guide-list .set-list{margin:4px 0 0;padding-left:1.4em;font-size:.95rem}
