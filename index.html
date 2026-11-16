@@ -29,9 +29,10 @@
     --veil:rgba(255,253,254,.87);
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;overflow-x:hidden}
   body{
     margin:0;
+    overflow-x:hidden;
     background:var(--bg);
     color:var(--ink);
     position:relative;
@@ -64,6 +65,14 @@
   @media (min-width:800px){
     .wrap{margin:22px auto 30px}
   }
+  /* 改行禁止の文などがグリッド／フレックスの最小幅を押し広げて
+     ページ全体が画面幅より広がらないようにする */
+  .guide-list>li,.faq-list>li,.merit-list li,.card,.plan-grid>*,
+  .guide-list,.faq-list,.merit-list,.plan-grid,section,.participants{
+    min-width:0;
+  }
+  .sticky-nav{overflow:hidden}
+  .sticky-nav a{min-width:0}
 
   /* 桜の装飾パーツ（白背景のJPEGを multiply で背景になじませる） */
   .deco{
@@ -404,6 +413,12 @@
   }
   .guide-group-title:first-of-type{margin-top:2px}
   .guide-list + .guide-list{margin-top:14px}
+  /* 補足文は1行のまま、画面幅に連動して十分小さくし、狭いスマホでもカード内に余裕を持って収める。
+     360px幅では約10.3pxになり、23文字で約236px＝カード内幅（約272px）に対して左右に余白が残る */
+  .coaster-note{font-size:min(.82rem,2.85vw);color:var(--ink-soft);white-space:nowrap;max-width:100%}
+  @media (max-width:520px){
+    .coaster-note{font-size:min(.82rem,2.85vw);letter-spacing:-.02em}
+  }
   .guide-list .target-list{margin:4px 0 6px;padding-left:1.4em;font-size:.95rem}
   .guide-list .target-list li{margin-bottom:2px}
   .guide-list .set-list{margin:4px 0 0;padding-left:1.4em;font-size:.95rem}
@@ -838,8 +853,8 @@
         <h3>コースターについて</h3>
         <p>ステッカー購入者さんへの特典としてランダム配布します。</p>
         <p>ステッカーを2枚ご購入につき、ランダムで1枚プレゼントいたします。</p>
-        <p>コースターはお申込み1件ごとに1種類（10枚）を制作します。</p>
-        <p style="font-size:.82rem;color:var(--ink-soft)">コースターの使用方法は運営にお任せいただきます🙏</p>
+        <p>お申込み1件ごとに1種類（10枚）を制作します。</p>
+        <p class="coaster-note">コースターの使用方法は運営にお任せいただきます</p>
       </li>
     </ul>
 
