@@ -8,7 +8,7 @@
 <title>ゆるゆるキャラクター祭 ホームページ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     color-scheme: light;
@@ -528,12 +528,12 @@
   @media (max-width:520px){
     .sched th{white-space:normal;width:7.2em}
   }
-  /* 補足文のトンマナはスクショの見た目に合わせる：本文（.95rem）より小さめの
-     .8rem、色はグレーがかった落ち着いた #5d4951、太さは通常（400）で
+  /* 補足文は太字にしない：本文（.95rem）より小さめの .8rem、
+     色はグレーがかった落ち着いた #5d4951、太さは細字（300）で
      各項目のタイトルの下に出す */
-  .sched td span{display:block;font-weight:400;font-size:.8rem;color:#5d4951}
-  /* 表の下の※注記はスクショでは本文とほぼ同じ大きさで、補足と同じ落ち着いた色 */
-  .sched-note{margin:4px 0 0;font-size:.95rem;color:#5d4951}
+  .sched td span{display:block;font-weight:300;font-size:.8rem;color:#5d4951}
+  /* 表の下の※注記も補足として細字にし、本文とほぼ同じ大きさ・補足と同じ落ち着いた色にする */
+  .sched-note{margin:4px 0 0;font-size:.95rem;font-weight:300;color:#5d4951}
 
   .contact-card{text-align:center}
   .contact-card p{margin:0 0 2px;line-height:1.45}
