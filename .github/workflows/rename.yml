@@ -1,0 +1,22 @@
+name: Rename HTML to index
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rename file to index.html
+        run: mv -f yuruyurukiyarakutaji-homupezi.html index.html
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Rename yuruyurukiyarakutaji-homupezi.html to index.html"
+          git push
