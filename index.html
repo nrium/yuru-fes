@@ -782,7 +782,14 @@
     display:grid;
     gap:10px;
   }
+  /* 番号は左に固定し、本文は番号の右の列の中で折り返す。
+     折り返した2行目が番号の下に回り込まないようにする。
+     word-break:keep-all は使わない：英単語（or等）が行末で
+     割れてしまうため、和文の通常の折り返しに任せる */
   .png-steps ol li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
     background:var(--surface-softer);
     border:1px solid var(--pink-line);
     border-radius:12px;
@@ -790,21 +797,19 @@
     font-weight:700;
     font-size:.85rem;
     line-height:1.6;
-    word-break:keep-all;
-    overflow-wrap:anywhere;
     line-break:strict;
   }
   /* 入稿手順も本当の手順なので番号を使う。丸数字の絵文字でなく、
      輪郭線の丸に数字を組む（Lucide風の線の印） */
   .png-steps .step-num{
+    flex:0 0 auto;
     display:inline-grid;place-items:center;
     width:22px;height:22px;
     border:1.5px solid var(--pink-deep);
     border-radius:50%;
     color:var(--pink-deep);
     font-size:.78rem;font-weight:800;line-height:1;
-    margin-right:8px;
-    vertical-align:-6px;
+    margin-top:1px;
   }
   .png-steps .png-note{
     margin:14px 0 0;
@@ -879,8 +884,11 @@
   }
   @media (hover:hover){.sticky-nav a:hover{background:var(--pink-pale)}
   .sticky-nav a.nav-apply:hover{background:var(--pink-deep)}}
-  .sticky-nav a:nth-child(2){flex:1.35 1 0}
-  .sticky-nav a:nth-child(3){flex:1.1 1 0}
+  /* 「トップに戻る」「お問い合わせ」はPCの右カラムメニュー専用。
+     スマホの上部バーでは出さない（項目が増えて窮屈になるため） */
+  .sticky-nav a.nav-pc{display:none}
+  .sticky-nav a:nth-child(3){flex:1.35 1 0}
+  .sticky-nav a:nth-child(4){flex:1.1 1 0}
   .sticky-nav a.nav-apply{
     background:var(--pink);
     border-color:var(--pink-deep);
@@ -903,7 +911,10 @@
   @media (min-width:1024px){
     .wrap{margin:22px auto 30px calc(50% - 486px)}
 
-    /* 固定メニュー：右カラム（縦並び） */
+    /* 固定メニュー：右カラム（縦並び）
+       PCではスクロールを待たず、開いた直後から常時表示する。
+       スマホ・タブレット（1024px未満）は従来どおりスクロールで
+       上部バーが出る仕組みのまま変えない */
     .sticky-nav{
       top:50%;
       left:calc(50% + 298px);
@@ -911,9 +922,9 @@
       width:188px;
       border:1px solid var(--pink-line);
       border-radius:10px;
-      transform:translate(24px,-50%);
-      opacity:0;
-      pointer-events:none;
+      transform:translate(0,-50%);
+      opacity:1;
+      pointer-events:auto;
       transition:transform .25s ease,opacity .25s ease;
     }
     .sticky-nav.show{
@@ -931,14 +942,16 @@
       gap:8px;
     }
     .sticky-nav a,
-    .sticky-nav a:nth-child(2),
-    .sticky-nav a:nth-child(3){
+    .sticky-nav a:nth-child(3),
+    .sticky-nav a:nth-child(4){
       flex:none;
       width:100%;
       min-height:46px;
       padding:8px 10px;
       font-size:.9rem;
     }
+    /* PCの右カラムでは「トップに戻る」（先頭）と「お問い合わせ」（末尾）も表示する */
+    .sticky-nav a.nav-pc{display:inline-flex}
 
     /* 説明画像：幅いっぱいにせず、中央に小さめに表示する。
        セレクタは figure.fig にする：基本ルールの figure.fig
@@ -1024,13 +1037,15 @@
 <body>
 <nav class="sticky-nav" id="stickyNav" aria-label="ページ内メニュー">
   <div class="sticky-nav-inner">
+    <a class="nav-pc" href="#top">トップに戻る</a>
     <a href="#guidelines">募集要項</a>
     <a href="#participants">入稿について</a>
     <a href="#faq">よくある質問</a>
-    <a class="nav-apply" href="#apply">お申し込み</a>
+    <a class="nav-apply" href="#flow">お申し込み</a>
+    <a class="nav-pc" href="#contact">お問い合わせ</a>
   </div>
 </nav>
-<div class="wrap">
+<div class="wrap" id="top">
 
   <!-- ===== ヒーロー（検討者向け） ===== -->
   <header class="hero">
